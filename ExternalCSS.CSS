@@ -1,0 +1,10 @@
+#rect1 {
+	background-color:black;
+	position: relative;
+	width: 400px;
+	height: 400px;
+	top: 60px;
+	left: 60px;
+	display: inline-block;
+	z-index: 1
+}
