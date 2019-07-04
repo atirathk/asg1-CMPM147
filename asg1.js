@@ -1,12 +1,17 @@
-import Particle from 'particle.js';
+p = Particle;
+particles = ParticleSystem;
+function setup() {
+  	particles = new ParticleSystem(10, new p5.Vector(500, 300));
+}
 
-preload: function() {
-
-},
-create: function() {
-    newP = new Particle(50, 50);
-    newP.emit(4, 5, 5);
-},
-update: function() {
-    
-};
+function draw() {
+	createCanvas(1152, 648);
+ 	background(0);
+	particles.run();
+	/*for(var i = 0; i < particles.pNum; i++) {
+		p = particles.pList[i];
+		if (p.alive() == false) {
+			p.emit(new p5.Vector(i, 1), 255);
+		}
+	}*/
+}

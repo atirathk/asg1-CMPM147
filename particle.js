@@ -1,28 +1,44 @@
-export class Particle {
-	construcor(x, y) {
-		this.originX = x;
-		this.originY = y;
-		this.x = x;
-		this.y = y;
-		this.status = "dead";
+class Particle {
+	origin = p5.Vector;
+	location = p5.Vector;
+	velocity = p5.Vector;
+	lifespan = float;
+	constructor(origin) {
+		this.origin = new p5.Vector(origin.x, origin.y);
+		this.location = new p5.Vector(origin.x, origin.y);
+		this.velocity = new p5.Vector(0, 0);
+		this.lifespan = 0;
 	}
-	this.update = function() {
-		this.x += this.xForce;
-		this.y = this.yForce;
-		setInterval((this.lifetime -= -1), 1000);
-		if(this.lifetime = 0) {
+	update() {
+		this.location.add(this.velocity);
+		this.lifespan -= 1;
+		if(this.alive() == false) {
 			this.kill();
 		}
 	}
-	emit(xForce, yForce, lifetime) {
-		this.status = "alive";
-		this.xForce = xForce;
-		this.yForce = yForce;
-		this.lifetime = lifetime;
+	display() {
+	    stroke(this.lifespan);
+	    fill(this.lifespan);
+	    ellipse(this.location.x,this.location.y,8,8);
+	}
+	run() {
+		this.display();
+		this.update();
+	}
+	alive() {
+		if(this.lifespan < 0) {
+			return false;
+		}
+		else {
+			return true;
+		}
+	}
+	emit(velocity, lifespan) {
+		this.velocity = velocity;
+		this.lifespan = lifespan;
 	}
 	kill() {
-		this.status = "dead";
-		this.x = this.originX;
-		this.y = this.originY;
+		this.location.x = this.origin.x;
+		this.location.y = this.origin.y;
 	}
 }
